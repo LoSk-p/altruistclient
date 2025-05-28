@@ -4,25 +4,9 @@ from aioresponses import aioresponses
 from altruistclient.client import AltruistClient
 from altruistclient.model import AltruistDeviceModel
 
-test_ip = "192.168.1.5"
-url = f"http://{test_ip}/data.json"
-json_data = {
-    "software_version": "R_2025-03",
-    "sensor_id": "5366960e8b18",
-    "sensordatavalues": [
-        {"value_type": "signal", "value": "-48"},
-        {"value_type": "SDS_P1", "value": "1.55"},
-        {"value_type": "SDS_P2", "value": "0.508333"},
-        {"value_type": "BME280_humidity", "value": "40.03418"},
-        {"value_type": "BME280_temperature", "value": "21.34277"},
-        {"value_type": "BME280_pressure", "value": "101636.6"},
-        {"value_type": "PCBA_noiseMax", "value": "59"},
-        {"value_type": "PCBA_noiseAvg", "value": "53"},
-    ],
-}
 
 @pytest.mark.asyncio
-async def test_from_ip():
+async def test_from_ip(test_ip, url, json_data):
     device = AltruistDeviceModel(id="5366960e8b18", ip_address=test_ip)
     async with ClientSession() as session:
         with aioresponses() as mocked:
@@ -34,7 +18,7 @@ async def test_from_ip():
 
 
 @pytest.mark.asyncio
-async def test_fetch_data():
+async def test_fetch_data(test_ip, url, json_data):
     device = AltruistDeviceModel(id="5366960e8b18", ip_address=test_ip)
     async with ClientSession() as session:
         with aioresponses() as mocked:
