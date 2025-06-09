@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "altruistclient"
-version = "0.1.0"
+version = "0.1.1"
 description = "Async library for discovering and fetching data from Altruist sensors"
 authors = [
     "Alena Bugrova <bugrovaad@gmail.com>",
@@ -13,6 +13,7 @@ readme = "README.md"
 
 packages = [
     { include = "altruistclient" },
+    { include = "altruistclient/py.typed" },
 ]
 exclude = [
     ".gitignore",

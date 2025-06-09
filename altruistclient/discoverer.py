@@ -48,7 +48,7 @@ class AltruistDiscoverer:
         return self._devices
 
     def _async_on_service_state_change(
-        self, zeroconf, service_type: str, name: str, state_change: ServiceStateChange
+        self, zeroconf: Zeroconf, service_type: str, name: str, state_change: ServiceStateChange
     ) -> None:
         _LOGGER.debug(f"Service {name} of type {service_type} state changed: {state_change}")
         if state_change is not ServiceStateChange.Added:
@@ -58,7 +58,7 @@ class AltruistDiscoverer:
         task.add_done_callback(_PENDING_TASKS.discard)
 
 
-    async def _async_add_device(self, zeroconf, service_type: str, name: str) -> None:
+    async def _async_add_device(self, zeroconf: Zeroconf, service_type: str, name: str) -> None:
         info = AsyncServiceInfo(service_type, name)
         await info.async_request(zeroconf, 3000)
         ip = info.parsed_addresses()[0]

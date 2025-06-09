@@ -77,7 +77,7 @@ class AltruistClient:
         return True
 
     async def fetch_data(self) -> dict:
-        """Get the latest data from Luftdaten service."""
+        """Get the latest data from Altruist device."""
         responseData = None
         try:
             _LOGGER.debug("Get data from %s", str(self._resource))
